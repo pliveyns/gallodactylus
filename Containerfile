@@ -56,9 +56,9 @@ FROM ghcr.io/ublue-os/base-main:44@sha256:0493d47dd760194a69bf9de1d2a4173fea2bf5
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
 ARG IMAGE_NAME="gallodactylus"
-ARG IMAGE_VENDOR="projectbluefin"
+ARG IMAGE_VENDOR="pliveyns"
 ARG UBLUE_IMAGE_TAG="stable"
-ARG BASE_IMAGE_NAME="base-atomic"
+ARG BASE_IMAGE_NAME="base-main"
 ARG FEDORA_MAJOR_VERSION="44"
 ARG VERSION=""
 
