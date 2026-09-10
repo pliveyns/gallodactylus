@@ -89,7 +89,7 @@ echo "::group:: Install Additional Utilities"
 
 # Install additional utilities that work well with Niri
 dnf5 install -y \
-  allacritty \
+  alacritty \
   kitty
 #xdg-desktop-portal-????
 
