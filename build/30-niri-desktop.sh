@@ -38,19 +38,17 @@ copr_install_isolated "avengemedia/danklinux" \
   danksearch \
   dms-greeter \
   matugen \
-  quickshell \
-  dankcalendar
-#    dms-color-picker \
-#    dmsclipboard \
-#    cli11 \
-#    cliphist \
-#    quickshell \
-#    wl-clipboard \
-#    matugen \
-#    cava \
-#    qt6-multimedia
-#    breakpad
-#    material-symbols-fonts
+  quickshell
+#  dankcalendar \          # This exists as Flatpak
+#  dms-color-picker \
+#  dmsclipboard \
+#  cli11 \
+#  cliphist \
+#  wl-clipboard \
+#  cava \
+#  qt6-multimedia
+#  breakpad
+#  material-symbols-fonts
 
 echo "Niri desktop installed successfully"
 echo "::endgroup::"
