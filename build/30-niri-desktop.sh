@@ -10,28 +10,27 @@ set -euo pipefail
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
-echo "::group:: Remove GNOME Desktop"
-
-# Remove GNOME Shell and related packages
-dnf5 remove -y \
-  gnome-shell \
-  gnome-shell-extension* \
-  gnome-terminal \
-  gnome-software \
-  gnome-control-center \
-  gdm
-
-echo "GNOME desktop removed"
-echo "::endgroup::"
+#echo "::group:: Remove GNOME Desktop"
+#
+## Remove GNOME Shell and related packages
+#dnf5 remove -y \
+#  gnome-shell \
+#  gnome-shell-extension* \
+#  gnome-terminal \
+#  gnome-software \
+#  gnome-control-center \
+#  gdm
+#
+#echo "GNOME desktop removed"
+#echo "::endgroup::"
 
 echo "::group:: Install Niri Desktop with DMS"
 
 # Install Niri and DMS and recommended extras
 # isolated COPR pattern to avoid leaving the COPR enabled
-copr_install_isolated "yalter/niri" \
-  niri
 copr_install_isolated "avengemedia/dms" \
-  dms
+  dms \
+  niri
 copr_install_isolated "avengemedia/danklinux" \
   dms-cli \
   dgop \
