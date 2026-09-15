@@ -49,6 +49,19 @@ copr_install_isolated "avengemedia/danklinux" \
 #  breakpad
 #  material-symbols-fonts
 
+dnf5 install -y \
+  libwayland-server \
+  libdisplay-info \
+  libseat \
+  xwayland-satellite \
+  power-profiles-daemon \
+  cups-pk-helper \
+  fira-code-fonts \
+  kf5-kimageformats \
+  kf6-kimageformats \
+  rsms-inter-fonts \
+  rsms-inter-vf-fonts
+
 echo "Niri desktop installed successfully"
 echo "::endgroup::"
 
