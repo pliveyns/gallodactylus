@@ -8,9 +8,12 @@ set -euo pipefail
 
 echo "::group:: Install Packages"
 
+# Needed for Fedora bootc images
+dnf5 install -y 'dnf5-command(config-manager)'
+
 # Install the default packages and verify the DNF cache is working.
 # gum is required by the default ujust recipes for interactive prompts.
-dnf5 install -y tmux gum
+dnf5 install -y gum
 
 # Example using COPR with isolated pattern:
 # copr_install_isolated "ublue-os/staging" package-name
