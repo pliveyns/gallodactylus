@@ -8,9 +8,6 @@ set -euo pipefail
 
 echo "::group:: Install Packages"
 
-# Needed for Fedora bootc images
-dnf5 install -y 'dnf5-command(config-manager)'
-
 # Install the default packages and verify the DNF cache is working.
 # gum is required by the default ujust recipes for interactive prompts.
 dnf5 install -y gum
