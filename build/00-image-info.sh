@@ -18,6 +18,9 @@ set -euo pipefail
 #   SHA_HEAD_SHORT      - Short git SHA (optional, for dev builds)
 ###############################################################################
 
+# Needed for Fedora bootc images
+dnf5 install -y 'dnf5-command(config-manager)'
+
 # Branding — customize these for your image
 IMAGE_PRETTY_NAME="${IMAGE_PRETTY_NAME:-gallodactylus}"
 IMAGE_LIKE="${IMAGE_LIKE:-fedora}"

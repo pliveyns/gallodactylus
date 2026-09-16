@@ -13,6 +13,10 @@ set -euo pipefail
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
+# Packages missing in fedora-bootc image
+dnf5 install -y \
+  rsync
+
 # Enable nullglob for all glob operations to prevent failures on empty matches
 shopt -s nullglob
 
