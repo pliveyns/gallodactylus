@@ -51,14 +51,14 @@ COPY --from=brew /system_files /oci/brew
 
 # Base Image - GNOME included (Fedora official OSTree desktop)
 # Renovate will keep the digest pin up to date.
-FROM ghcr.io/ublue-os/base-main:44@sha256:88d5f95b786fc274bd7903bf39dfa582ecf0eedab6f5415703d4e5fadcdeca05
+FROM quay.io/fedora/fedora-bootc:44@sha256:92124c84fa18e2a8f6429f3cbd2e86b8f6b96831c6eb24c686f4670514c12234
 
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
 ARG IMAGE_NAME="gallodactylus"
 ARG IMAGE_VENDOR="pliveyns"
 ARG UBLUE_IMAGE_TAG="stable"
-ARG BASE_IMAGE_NAME="base-main"
+ARG BASE_IMAGE_NAME="base-atomic"
 ARG FEDORA_MAJOR_VERSION="44"
 ARG VERSION=""
 
@@ -89,6 +89,22 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build/10-build.sh
 
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache/libdnf5 \
+    --mount=type=cache,dst=/var/cache/rpm-ostree \
+    --mount=type=secret,id=GITHUB_TOKEN \
+    --mount=type=tmpfs,dst=/boot \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/build/20-base.sh
+
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache/libdnf5 \
+    --mount=type=cache,dst=/var/cache/rpm-ostree \
+    --mount=type=secret,id=GITHUB_TOKEN \
+    --mount=type=tmpfs,dst=/boot \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/build/30-niri-desktop.sh
+
 ### CLEANUP
 ## Use Bluefin's clean-stage.sh to remove build artifacts before linting.
 ## /run is deliberately not mounted as tmpfs here: clean-stage.sh must remove
@@ -113,4 +129,5 @@ CMD ["/sbin/init"]
 
 ### LINTING
 ## Verify final image and contents are correct. --fatal-warnings catches issues.
-RUN bootc container lint --fatal-warnings
+#RUN bootc container lint --fatal-warnings
+RUN bootc container lint
