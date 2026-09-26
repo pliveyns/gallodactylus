@@ -1,7 +1,7 @@
 ###############################################################################
 # PROJECT NAME CONFIGURATION
 ###############################################################################
-# Name: finpilot
+# Name: gallodactylus
 #
 # The authoritative name at publish time is the repository name: build-image.yml
 # derives IMAGE_NAME from ${{ github.event.repository.name }} and pushes the
@@ -54,8 +54,8 @@ FROM quay.io/fedora-ostree-desktops/silverblue:44@sha256:653d8c437f441b6a139f4e9
 
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
-ARG IMAGE_NAME="finpilot"
-ARG IMAGE_VENDOR="projectbluefin"
+ARG IMAGE_NAME="gallodactylus"
+ARG IMAGE_VENDOR="pliveyns"
 ARG UBLUE_IMAGE_TAG="stable"
 # Supplied by `just build` from the base image's FROM line.
 ARG BASE_IMAGE_NAME=""
