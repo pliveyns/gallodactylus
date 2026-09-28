@@ -12,7 +12,13 @@ echo "::group:: Install Niri"
 # with them, cosmic-greeter and xdg-desktop-portal-cosmic. The lines after it
 # are the genuinely optional apps.
 dnf5 install -y \
-  niri
+  niri \
+  noctalia
+
+dnf5 install -y --nogpgcheck --repofrompath \
+  'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+dnf5 install -y \
+  noctalia-greeter
 
 echo "::endgroup::"
 
@@ -41,6 +47,6 @@ echo "::group:: Switch the display manager"
 # gdm was removed above, so COSMIC's greeter takes over the display-manager
 # alias. cosmic-session already ships /usr/share/wayland-sessions/cosmic.desktop,
 # so there is no session file to write by hand.
-#systemctl enable cosmic-greeter.service
+systemctl enable greetd.service
 
 echo "::endgroup::"
