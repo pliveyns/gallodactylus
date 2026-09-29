@@ -26,7 +26,12 @@ shopt -s nullglob
 
 echo "::group:: Install Default Packages"
 
-dnf5 install -y just gum fzf jq
+dnf5 install -y just gum fzf jq \
+  alacritty \
+  kitty \
+  atuin
+
+copr_install_isolated "varlad/zellij" zellij
 
 echo "::endgroup::"
 
