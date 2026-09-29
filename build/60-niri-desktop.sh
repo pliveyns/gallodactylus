@@ -16,7 +16,7 @@ dnf5 install -y \
   noctalia
 
 dnf5 install -y --nogpgcheck --repofrompath \
-  "terra,https://repos.fyralabs.com/terra$releasever" terra-release
+  terra,https://repos.fyralabs.com/terra$releasever terra-release
 dnf5 install -y \
   noctalia-greeter
 
