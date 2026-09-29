@@ -27,7 +27,7 @@ shopt -s nullglob
 echo "::group:: Install Default Packages"
 
 dnf5 install -y just gum fzf jq \
-  allacritty \
+  alacritty \
   kitty \
   atuin
 
