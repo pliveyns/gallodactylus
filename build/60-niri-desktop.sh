@@ -16,7 +16,7 @@ dnf5 install -y \
   noctalia
 
 dnf5 install -y --nogpgcheck --repofrompath \
-  'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+  "terra,https://repos.fyralabs.com/terra$releasever" terra-release
 dnf5 install -y \
   noctalia-greeter
 
@@ -37,16 +37,13 @@ dnf5 remove -y \
   gnome-classic-session \
   gnome-control-center \
   gnome-software \
-  nautilus \
   gdm
 
 echo "::endgroup::"
 
 echo "::group:: Switch the display manager"
 
-# gdm was removed above, so COSMIC's greeter takes over the display-manager
-# alias. cosmic-session already ships /usr/share/wayland-sessions/cosmic.desktop,
-# so there is no session file to write by hand.
+# Enable greetd for noctalia-greeter
 systemctl enable greetd.service
 
 echo "::endgroup::"
