@@ -15,10 +15,8 @@ dnf5 install -y \
   niri \
   noctalia
 
-dnf5 install -y --nogpgcheck --repofrompath \
-  "terra,https://repos.fyralabs.com/terra${VERSION}" terra-release
-dnf5 install -y \
-  noctalia-greeter
+dnf5 -y install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+dnf5 install -y noctalia-greeter
 
 echo "::endgroup::"
 
