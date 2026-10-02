@@ -6,6 +6,8 @@ set -euo pipefail
 # Replace GNOME with the Niri desktop
 ###############################################################################
 
+source /ctx/build/copr-helpers.sh
+
 shopt -s nullglob
 
 echo "::group:: Remove GNOME"
