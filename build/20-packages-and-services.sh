@@ -30,17 +30,6 @@ dnf5 install -y just gum fzf jq
 
 echo "::endgroup::"
 
-echo "::group:: Install some packages"
-
-dnf5 install -y \
-  alacritty \
-  kitty \
-  atuin
-
-copr_install_isolated "varlad/zellij" zellij
-
-echo "::endgroup::"
-
 echo "::group:: Install uupd"
 
 # uupd owns the update policy. Its binary comes from the ublue-os/packages

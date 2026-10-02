@@ -6,6 +6,8 @@ set -euo pipefail
 # Replace GNOME with the Niri desktop
 ###############################################################################
 
+source /ctx/build/copr-helpers.sh
+
 shopt -s nullglob
 
 echo "::group:: Remove GNOME"
@@ -25,6 +27,17 @@ dnf5 remove -y \
   gnome-initial-setup \
   gnome-software \
   gdm
+
+echo "::endgroup::"
+
+echo "::group:: Install some packages"
+
+dnf5 install -y \
+  alacritty \
+  kitty \
+  atuin
+
+copr_install_isolated "varlad/zellij" zellij
 
 echo "::endgroup::"
 
