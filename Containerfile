@@ -55,7 +55,7 @@ FROM quay.io/fedora-ostree-desktops/silverblue:44@sha256:9054c096f3c84218efefeaf
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
 ARG IMAGE_NAME="gallodactylus"
-ARG IMAGE_VENDOR="pliveyns"
+ARG IMAGE_VENDOR="projectbluefin"
 ARG UBLUE_IMAGE_TAG="stable"
 # Supplied by `just build` from the base image's FROM line.
 ARG BASE_IMAGE_NAME=""

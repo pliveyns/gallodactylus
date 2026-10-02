@@ -28,6 +28,17 @@ dnf5 remove -y \
 
 echo "::endgroup::"
 
+echo "::group:: Install some packages"
+
+dnf5 install -y \
+  alacritty \
+  kitty \
+  atuin
+
+copr_install_isolated "varlad/zellij" zellij
+
+echo "::endgroup::"
+
 echo "::group:: Install Niri"
 
 # xwayland-satellite is niri's hard requirement today; named anyway, because a
