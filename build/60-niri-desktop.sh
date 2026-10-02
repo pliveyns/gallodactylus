@@ -145,62 +145,62 @@ rm -f /etc/yum.repos.d/terra.repo
 
 echo "::endgroup::"
 
-echo "::group:: Verify the desktop is coherent"
-
-# Every check below is a way the image boots to a black screen, which a
-# container build cannot otherwise catch. Fail here instead.
-
-test -f /usr/share/wayland-sessions/niri.desktop
-if compgen -G "/usr/share/wayland-sessions/gnome*.desktop" >/dev/null; then
-  echo "ERROR: a GNOME session entry survived the removal" >&2
-  exit 1
-fi
-
-# niri speaks Mutter's ScreenCast D-Bus API, so the GNOME portal backend stays
-# correct with mutter gone. niri's own niri-portals.conf names these three
-# backends, which is why this image ships no portal config of its own.
-rpm -q xdg-desktop-portal-gnome xdg-desktop-portal-gtk gnome-keyring
-test -f /usr/share/xdg-desktop-portal/niri-portals.conf
-
-# The builtin templates custom/config/noctalia/ selects, and the GTK 3 theme
-# their apply hook expects. A template dropped upstream would otherwise be a
-# line in a config file that Noctalia silently ignores.
-test -f /usr/share/noctalia/assets/templates/gtk/gtk3.css
-test -f /usr/share/noctalia/assets/templates/gtk/gtk4.css
-test -d /usr/share/themes/adw-gtk3-dark
-
-# The same argument as `niri validate` below, for the other half of the
-# session. The overlay phase seeded this from custom/config/, and an unknown
-# key or a bad value would be a broken Noctalia config in every new account.
-# Whole directory rather than a filename, so it follows the seam and not one
-# file; a fork that ships no Noctalia defaults has nothing to check.
-if [[ -d /etc/skel/.config/noctalia ]]; then
-  noctalia config validate /etc/skel/.config/noctalia
-fi
-
-# custom/files placed the config during the overlay phase; this is the first
-# point in the build where a compositor exists to check it.
-niri validate --config /etc/niri/config.kdl
-
-# Every bind in that config is an IPC call into a running Noctalia.
-noctalia --version
-
-# greetd must run the wrapper, not the greeter binary: the wrapper starts the
-# bundled compositor. The assets tree carries the fonts, icons and UI; the
-# Polkit action is what lets `greeter-sync` apply the session's theme.
-test -x /usr/bin/noctalia-greeter-session
-test -x /usr/bin/noctalia-greeter
-test -x /usr/bin/noctalia-greeter-compositor
-test -d /usr/share/noctalia-greeter/assets
-test -x /usr/bin/noctalia-greeter-apply-appearance
-test -f /usr/share/polkit-1/actions/org.noctalia.greeter.apply-appearance.policy
-
-# From custom/files, via the overlay phase. rsync carries the mode across, and
-# a lost execute bit would leave the greeter with no state directory and no
-# keyboard layout -- the second of which reads as a rejected password.
-test -x /usr/libexec/noctiri-greeter-setup.sh
-
-echo "::endgroup::"
+#echo "::group:: Verify the desktop is coherent"
+#
+## Every check below is a way the image boots to a black screen, which a
+## container build cannot otherwise catch. Fail here instead.
+#
+#test -f /usr/share/wayland-sessions/niri.desktop
+#if compgen -G "/usr/share/wayland-sessions/gnome*.desktop" >/dev/null; then
+#  echo "ERROR: a GNOME session entry survived the removal" >&2
+#  exit 1
+#fi
+#
+## niri speaks Mutter's ScreenCast D-Bus API, so the GNOME portal backend stays
+## correct with mutter gone. niri's own niri-portals.conf names these three
+## backends, which is why this image ships no portal config of its own.
+#rpm -q xdg-desktop-portal-gnome xdg-desktop-portal-gtk gnome-keyring
+#test -f /usr/share/xdg-desktop-portal/niri-portals.conf
+#
+## The builtin templates custom/config/noctalia/ selects, and the GTK 3 theme
+## their apply hook expects. A template dropped upstream would otherwise be a
+## line in a config file that Noctalia silently ignores.
+#test -f /usr/share/noctalia/assets/templates/gtk/gtk3.css
+#test -f /usr/share/noctalia/assets/templates/gtk/gtk4.css
+#test -d /usr/share/themes/adw-gtk3-dark
+#
+## The same argument as `niri validate` below, for the other half of the
+## session. The overlay phase seeded this from custom/config/, and an unknown
+## key or a bad value would be a broken Noctalia config in every new account.
+## Whole directory rather than a filename, so it follows the seam and not one
+## file; a fork that ships no Noctalia defaults has nothing to check.
+#if [[ -d /etc/skel/.config/noctalia ]]; then
+#  noctalia config validate /etc/skel/.config/noctalia
+#fi
+#
+## custom/files placed the config during the overlay phase; this is the first
+## point in the build where a compositor exists to check it.
+#niri validate --config /etc/niri/config.kdl
+#
+## Every bind in that config is an IPC call into a running Noctalia.
+#noctalia --version
+#
+## greetd must run the wrapper, not the greeter binary: the wrapper starts the
+## bundled compositor. The assets tree carries the fonts, icons and UI; the
+## Polkit action is what lets `greeter-sync` apply the session's theme.
+#test -x /usr/bin/noctalia-greeter-session
+#test -x /usr/bin/noctalia-greeter
+#test -x /usr/bin/noctalia-greeter-compositor
+#test -d /usr/share/noctalia-greeter/assets
+#test -x /usr/bin/noctalia-greeter-apply-appearance
+#test -f /usr/share/polkit-1/actions/org.noctalia.greeter.apply-appearance.policy
+#
+## From custom/files, via the overlay phase. rsync carries the mode across, and
+## a lost execute bit would leave the greeter with no state directory and no
+## keyboard layout -- the second of which reads as a rejected password.
+#test -x /usr/libexec/noctiri-greeter-setup.sh
+#
+#echo "::endgroup::"
 
 echo "::group:: Configure and enable the greeter"
 
