@@ -6,6 +6,7 @@ set -euo pipefail
 # Replace GNOME with the Niri desktop
 ###############################################################################
 
+# shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
 shopt -s nullglob
