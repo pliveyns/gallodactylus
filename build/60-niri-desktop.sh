@@ -27,7 +27,8 @@ dnf5 remove -y \
   gnome-control-center \
   gnome-initial-setup \
   gnome-software \
-  gdm
+  gdm \
+  firefox
 
 echo "::endgroup::"
 
