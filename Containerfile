@@ -55,7 +55,7 @@ FROM quay.io/fedora-ostree-desktops/silverblue:44@sha256:3507df337f20cb801647d1e
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
 ARG IMAGE_NAME="gallodactylus"
-ARG IMAGE_VENDOR="projectbluefin"
+ARG IMAGE_VENDOR="pliveyns"
 ARG UBLUE_IMAGE_TAG="stable"
 # Supplied by `just build` from the base image's FROM line.
 ARG BASE_IMAGE_NAME=""
@@ -106,7 +106,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build/20-packages-and-services.sh
 
 ### Niri desktop
-## Swap the default Gnome diskto from Silverblue by Niri
+## Swap the default Gnome desktop from Silverblue to Niri
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache/libdnf5 \
     --mount=type=cache,dst=/var/cache/rpm-ostree \
