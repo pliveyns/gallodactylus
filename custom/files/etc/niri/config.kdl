@@ -23,23 +23,35 @@ input {
     }
 
     touchpad {
+        dwt
         tap
         natural-scroll
+        accel-profile "adaptive"
     }
 
     mouse {
-        // accel-profile "flat"
+        accel-profile "flat"
+    }
+
+    trackpoint {
     }
 
     // Hovering a window focuses it. max-scroll-amount caps how far niri may
     // scroll the strip to bring a hovered window fully into view; 0% means it
     // never scrolls, so the layout stays put under the cursor.
-    focus-follows-mouse max-scroll-amount="0%"
+    // focus-follows-mouse max-scroll-amount="0%"
 }
 
 // Outputs are named by connector; `niri msg outputs` lists them. Noctalia's
 // settings panel configures monitors too, which is usually easier than this.
-/-output "eDP-1" {
+output "eDP-1" {
+    mode "1920x1080@60.000"
+    scale 1.0
+    transform "normal"
+    position x=0 y=0
+}
+
+output "Virtual-1" {
     mode "1920x1080@60.000"
     scale 1.0
     transform "normal"
@@ -47,7 +59,8 @@ input {
 }
 
 layout {
-    gaps 16
+    gaps 10
+    background-color "transparent"
 
     // Column placement when the strip is wider than the screen.
     center-focused-column "never"
@@ -58,17 +71,19 @@ layout {
         proportion 0.66667
     }
 
+    preset-window-heights {}
     default-column-width { proportion 0.5; }
 
     focus-ring {
+        off
         width 4
         active-color "#7aa2f7"
         inactive-color "#505050"
     }
 
     border {
-        off
-        width 4
+        // off
+        width 2
         active-color "#ffc87f"
         inactive-color "#505050"
         urgent-color "#9b0000"
@@ -89,13 +104,20 @@ layout {
 // autostart entry: it comes up with the session and goes down with it.
 spawn-at-startup "noctalia"
 
+overview {
+  workspace-shadow {
+    off
+  }
+}
+
 // Wayland-native rendering for Electron apps instead of the XWayland fallback.
 environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
+    XDG_CURRENT_DESKTOP "niri"
 }
 
 hotkey-overlay {
-    // skip-at-startup
+    skip-at-startup
 }
 
 prefer-no-csd
@@ -137,10 +159,10 @@ window-rule {
 binds {
     // "Mod" is Super on a TTY and Alt when niri runs nested in a window.
 
-    Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+Shift+Colon { show-hotkey-overlay; }
 
     // Mod+D is niri's default launcher bind, Mod+Space is Noctalia's own.
-    Mod+T hotkey-overlay-title="Open a Terminal: Ghostty" { spawn "ghostty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
     Mod+E hotkey-overlay-title="Open the File Manager: Files" { spawn "nautilus" "--new-window"; }
     Mod+D hotkey-overlay-title="Run an Application: Noctalia" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+Space hotkey-overlay-title="Run an Application: Noctalia" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
@@ -249,24 +271,24 @@ binds {
 
     // niri has dynamic workspaces, so an index past the last one lands on the
     // bottommost empty workspace rather than failing.
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+ampersand { focus-workspace 1; }
+    Mod+eacute { focus-workspace 2; }
+    Mod+quotedbl { focus-workspace 3; }
+    Mod+apostrophe { focus-workspace 4; }
+    Mod+parenleft { focus-workspace 5; }
+    Mod+section { focus-workspace 6; }
+    Mod+egrave { focus-workspace 7; }
+    Mod+exclam { focus-workspace 8; }
+    Mod+ccedilla { focus-workspace 9; }
+    Mod+Ctrl+ampersand { move-column-to-workspace 1; }
+    Mod+Ctrl+eacute { move-column-to-workspace 2; }
+    Mod+Ctrl+quotedbl { move-column-to-workspace 3; }
+    Mod+Ctrl+apostrophe { move-column-to-workspace 4; }
+    Mod+Ctrl+parenleft { move-column-to-workspace 5; }
+    Mod+Ctrl+section { move-column-to-workspace 6; }
+    Mod+Ctrl+egrave { move-column-to-workspace 7; }
+    Mod+Ctrl+exclam { move-column-to-workspace 8; }
+    Mod+Ctrl+ccedilla { move-column-to-workspace 9; }
 
     Mod+Tab { focus-workspace-previous; }
 
