@@ -50,12 +50,12 @@ COPY --from=brew /system_files /oci/brew
 
 # Base Image - GNOME included (Fedora official OSTree desktop)
 # Renovate will keep the digest pin up to date.
-FROM quay.io/fedora-ostree-desktops/silverblue:44@sha256:3507df337f20cb801647d1e773eff40f4c13560af311ca86d128f27928913275
+FROM quay.io/fedora-ostree-desktops/silverblue:44@sha256:c0a99068fbec80f2b752559ce3ed983a5a0821ace52ce18c85a7002fc6f55509
 
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
 ARG IMAGE_NAME="gallodactylus"
-ARG IMAGE_VENDOR="projectbluefin"
+ARG IMAGE_VENDOR="pliveyns"
 ARG UBLUE_IMAGE_TAG="stable"
 # Supplied by `just build` from the base image's FROM line.
 ARG BASE_IMAGE_NAME=""
@@ -106,7 +106,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     /ctx/build/20-packages-and-services.sh
 
 ### Niri desktop
-## Swap the default Gnome diskto from Silverblue by Niri
+## Swap the default Gnome desktop from Silverblue to Niri
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache/libdnf5 \
     --mount=type=cache,dst=/var/cache/rpm-ostree \

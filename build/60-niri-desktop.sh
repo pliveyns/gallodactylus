@@ -6,6 +6,7 @@ set -euo pipefail
 # Replace GNOME with the Niri desktop
 ###############################################################################
 
+# shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
 
 shopt -s nullglob
@@ -26,7 +27,8 @@ dnf5 remove -y \
   gnome-control-center \
   gnome-initial-setup \
   gnome-software \
-  gdm
+  gdm \
+  firefox
 
 echo "::endgroup::"
 
